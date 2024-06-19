@@ -14,7 +14,7 @@ import (
 	"github.com/go-pogo/easytls"
 	"github.com/go-pogo/env"
 	"github.com/go-pogo/env/dotenv"
-	"github.com/roeldev/youless-observer/cmd/observer/observer-app"
+	"github.com/roeldev/youless-observer/app/observer-app"
 )
 
 func init() {

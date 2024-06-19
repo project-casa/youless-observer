@@ -20,7 +20,7 @@ import (
 	"github.com/go-pogo/serv"
 	"github.com/roeldev/youless-logger/common/logging"
 	youlessobserver "github.com/roeldev/youless-observer"
-	"github.com/roeldev/youless-observer/cmd/observer/observer-app"
+	"github.com/roeldev/youless-observer/app/observer-app"
 )
 
 var unmarshalEnv func(conf *observerapp.Config) error

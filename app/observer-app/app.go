@@ -49,6 +49,7 @@ func New(conf Config, log *logging.Logger, bld *buildinfo.BuildInfo) (*App, erro
 		return nil, errors.Wrap(err, ErrCreateHealthCheck)
 	}
 
+	// set up telemetry
 	if conf.Telemetry.ServiceName == "" {
 		conf.Telemetry.ServiceName = "youless-" + Name
 	}
@@ -57,6 +58,7 @@ func New(conf Config, log *logging.Logger, bld *buildinfo.BuildInfo) (*App, erro
 		return nil, errors.Wrap(err, ErrSetupTelemetry)
 	}
 
+	// set up server
 	app.server, err = server.New(Name, conf.Server, log, telem,
 		server.WithBuildInfo(bld),
 		server.WithHealthChecker(app.health),
@@ -65,6 +67,7 @@ func New(conf Config, log *logging.Logger, bld *buildinfo.BuildInfo) (*App, erro
 		return nil, errors.Wrap(err, ErrCreateServer)
 	}
 
+	// set up YouLess client
 	app.client, err = youlessclient.NewClient(conf.YouLess,
 		youlessclient.WithLogger(log),
 		youlessclient.WithTracerProvider(telem.TracerProvider()),
@@ -73,6 +76,7 @@ func New(conf Config, log *logging.Logger, bld *buildinfo.BuildInfo) (*App, erro
 		return nil, errors.Wrap(err, ErrCreateClient)
 	}
 
+	// set up observer
 	app.observer, err = youlessobserver.NewObserver(telem.MeterProvider(),
 		youlessobserver.WithLogger(&observerLogger{log.Logger}),
 		youlessobserver.WithMeterReading(conf.Observer.MeterReadingRegisterer, app.client),
