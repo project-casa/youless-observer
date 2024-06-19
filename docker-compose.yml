@@ -1,0 +1,12 @@
+services:
+  observer:
+    image: roeldev/youless-observer:local
+    build:
+      context: .
+      args:
+        APP: observer
+    user: nonroot
+    env_file:
+      - ./cmd/observer/.env.local
+    ports:
+      - "2512:2512"

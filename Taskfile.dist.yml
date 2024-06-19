@@ -10,6 +10,17 @@ tasks:
       - go generate ./...
       - task: chart:readme
 
+  build:
+    desc: Build the project
+    cmds:
+      - docker compose build observer
+
+  run:
+    desc: Build and run the project
+    cmds:
+      - task: build
+      - docker compose up
+
   ci:lint:
     desc: Run linter via act
     cmds:
