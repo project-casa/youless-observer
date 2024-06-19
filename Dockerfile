@@ -10,7 +10,7 @@ WORKDIR /go/build/
 ARG APP=observer
 RUN set -eux  \
     && mkdir -p /root-out/  \
-    && cp cmd/${APP}/.env /root-out/.env
+    && cp ./cmd/${APP}/.env /root-out/.env
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -21,13 +21,13 @@ RUN set -eux  \
         -tags=notrace  \
         -ldflags="-s -w"  \
         -o="/root-out/main"  \
-        ./cmd/${APP}/main.go
+        ./cmd/${APP}/...
 
 ###############################################################################
 # create actual image
 FROM gcr.io/distroless/static
-COPY --from=builder /root-out/ /
+COPY --from=builder --chown=nonroot:nonroot /root-out/ /
 
 EXPOSE 2512
-USER 1000
+USER nonroot
 ENTRYPOINT ["/main"]
