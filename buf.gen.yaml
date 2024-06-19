@@ -1,0 +1,10 @@
+version: v1
+plugins:
+  - plugin: go
+    out: ./
+    opt:
+      - paths=source_relative
+#      - Mgoogle/protobuf/timestamp.proto=github.com/printeers/go-protosql
+  - plugin: connect-go
+    out: ./
+    opt: paths=source_relative

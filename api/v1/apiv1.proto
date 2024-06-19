@@ -1,0 +1,52 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package api.v1;
+
+option go_package = "github.com/roeldev/youless-observer/api/v1;apiv1";
+
+service APIService {
+  rpc MeterReading(MeterReadingRequest) returns (MeterReadingResponse) {}
+  rpc PhaseReading(PhaseReadingRequest) returns (PhaseReadingResponse) {}
+}
+
+message MeterReadingRequest {}
+
+message MeterReadingResponse {
+    message Electricity {
+        google.protobuf.Timestamp timestamp = 1;
+        double import1 = 2;
+        double import2 = 3;
+        double export1 = 4;
+        double export2 = 5;
+        double net = 6;
+        int64 power = 7;
+    }
+    message S0 {
+        google.protobuf.Timestamp timestamp = 1;
+        double total = 2;
+        int64 current = 3;
+    }
+    message Value {
+        google.protobuf.Timestamp timestamp = 1;
+        double total = 2;
+    }
+
+    optional Electricity electricity = 1;
+    optional S0 s0 = 2;
+    optional Value gas = 3;
+    optional Value water = 4;
+}
+
+message PhaseReadingRequest {}
+
+message PhaseReadingResponse {
+    message Phase {
+        double current = 1;
+        double power = 2;
+        double voltage = 3;
+    }
+
+    uint32 tariff = 1;
+    repeated Phase phase = 2;
+}
