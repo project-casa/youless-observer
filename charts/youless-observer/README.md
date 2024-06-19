@@ -1,10 +1,10 @@
 `youless-observer` Helm Charts
 ==============================
 
-[![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0--rc3-informational?style=flat) ][release-url]
+[![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat) ][release-url]
 [![Artifact Hub][artifact-hub-img]][artifact-hub-url]
 
-[release-url]: https://github.com/roeldev/youless-observer/releases/tag/v0.1.0
+[release-url]: https://github.com/roeldev/youless-observer/releases/tag/v0.2.0
 
 [artifact-hub-img]: https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/youless-observer
 
@@ -35,7 +35,7 @@ helm repo add youless-observer https://roeldev.github.io/youless-observer
 | networkPolicy.create | bool | `true` |  |
 | observer.debug | bool | `false` | When true, overrides and sets: `log.level: "debug"`, `log.accessLog: true`, `tls.insecureSkipVerify: true`. |
 | observer.image.repository | string | `"roeldev/youless-observer"` | The image repository and name. |
-| observer.image.tag | string | `"0.1.0"` | Tag of the image to deploy. |
+| observer.image.tag | string | `"0.2.0"` | Tag of the image to deploy. |
 | observer.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy for the container. |
 | observer.log.level | string | `"warn"` | Active log level, must be one of: debug, info, warn, error, fatal, panic, disabled. |
 | observer.log.timestamp | bool | `false` | Add timestamp to log entries when true. |
@@ -68,8 +68,6 @@ helm repo add youless-observer https://roeldev.github.io/youless-observer
 | observer.otel.exporter.otlp.tls.keyFile | string | `""` | Path to the TLS key file. Is ignored when `secretName` is set. |
 | observer.otel.exporter.otlp.tls.caCertFile | string | `""` | Path to the CA certificate file. Is ignored when `caSecretName` is set. |
 | observer.otel.exporter.otlp.tls.insecureSkipVerify | bool | `false` |  |
-| observer.prometheus.enabled | bool | `false` |  |
-| observer.prometheus.endpoint | string | `"/metrics"` |  |
 | observer.youless.configMapName | string | `""` | When a configMapName is provided, the config map is used to populate the `YOULESS_BASE_URL`, `YOULESS_NAME`, `YOULESS_TIMEOUT` and `YOULESS_PASSWORD` env variables. The config map must have the `url` and `name` keys. The `timeout` and `password` keys are optional. |
 | observer.youless.secretName | string | `""` | When provided, the secret is mounted and used as the value for `YOULESS_PASSWORD_FILE`. |
 | observer.youless.url | string | `"http://youless"` | Url of the YouLess device to connect to. |
