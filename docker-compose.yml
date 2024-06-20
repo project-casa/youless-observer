@@ -7,6 +7,7 @@ services:
         APP: observer
     user: nonroot
     env_file:
-      - ./cmd/observer/.env.local
+      - ./cmd/observer/.env
+      - ./cmd/observer/.env.docker.local
     ports:
       - "2512:2512"
