@@ -5,10 +5,21 @@ tasks:
   gen:
     desc: Generate code
     cmds:
+      - task: gen:buf
+      - go generate ./...
+      - task: gen:chart
+
+  gen:buf:
+    desc: Generate code with buf
+    cmds:
       - buf build
       - buf generate
-      - go generate ./...
-      - task: chart:readme
+
+  gen:chart:
+    desc: Generate Helm chart README
+    # https://github.com/norwoodj/helm-docs/
+    cmds:
+      - go run github.com/norwoodj/helm-docs/cmd/helm-docs@latest -t=README.tmpl.md -s=file -b=flat
 
   build:
     desc: Build the project
@@ -45,8 +56,3 @@ tasks:
     cmds:
       - helm package charts/youless-observer
 
-  chart:readme:
-    desc: Generate Helm chart README
-    # https://github.com/norwoodj/helm-docs/
-    cmds:
-      - go run github.com/norwoodj/helm-docs/cmd/helm-docs@latest -t=README.tmpl.md -s=file -b=flat
